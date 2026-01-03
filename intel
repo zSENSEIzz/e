@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FNF Diagonal Arrows</title>
+
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg,
+      #121212 0%,
+      #2e003e 40%,
+      #5a1a7a 70%,
+      #2e003e 90%,
+      #121212 100%);
+  }
+
+  .arrow {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    animation: fly 5s linear forwards;
+  }
+
+  @keyframes fly {
+    0% {
+      transform: translate(0, 0) scale(0.8) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-130vw, -130vh) scale(1.2) rotate(360deg);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<script>
+  // SĂGEȚILE TALE – LINKURI CORECTE
+  const arrows = [
+    "https://i.imgur.com/3iWIDBw.png", // down
+    "https://i.imgur.com/4QewOvI.png", // up
+    "https://i.imgur.com/Qhyu8dn.png", // left
+    "https://i.imgur.com/s3uDbsv.png"  // right
+  ];
+
+  const rowSpacing = 60;
+  let rows = Math.floor(window.innerHeight / rowSpacing);
+
+  function spawnDiagonalArrows() {
+    for (let i = 0; i < rows; i++) {
+      const el = document.createElement("div");
+      el.className = "arrow";
+
+      el.style.backgroundImage =
+        `url(${arrows[Math.floor(Math.random() * arrows.length)]})`;
+
+      el.style.left = (window.innerWidth + Math.random() * 100) + "px";
+      el.style.top = (i * rowSpacing + Math.random() * 20) + "px";
+
+      el.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+      document.body.appendChild(el);
+
+      setTimeout(() => el.remove(), 6000);
+    }
+  }
+
+  setInterval(spawnDiagonalArrows, 700);
+
+  window.addEventListener("resize", () => {
+    rows = Math.floor(window.innerHeight / rowSpacing);
+  });
+</script>
+
+</body>
+</html>
